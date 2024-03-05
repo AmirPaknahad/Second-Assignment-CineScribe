@@ -67,7 +67,8 @@ public class Actors {
         JSONObject object = new JSONObject(actorsInfoJson);
         String date = "";
         if (isAlive(actorsInfoJson)){
-            String statues = object.getString("death");
+            String death = object.getString("death");
+            date = death;
         }
         return date;
     }
