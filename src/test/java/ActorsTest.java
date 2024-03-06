@@ -6,7 +6,7 @@ public class ActorsTest {
     static Actors actors;
     @BeforeAll
     static void setUp() {
-        actors = new Actors("",false);
+        actors = new Actors(0.0,false);
         data1 = actors.getActorData("jennifer lawrence");
         data2 =  actors.getActorData("robin williams");
     }
@@ -16,7 +16,7 @@ public class ActorsTest {
     }
     @Test
     void IsAlive1() {
-        assertEquals(true,actors.isAlive(data1));
+        assertEquals(true,actors.getisAliveViaApi(data1));
     }
     @Test
     void getNetWorthViaApi2() {
@@ -24,7 +24,7 @@ public class ActorsTest {
     }
     @Test
     void IsAlive2() {
-        assertEquals(false,actors.isAlive(data2));
+        assertEquals(false,actors.getisAliveViaApi(data2));
     }
     @Test
     void getDateOfDeathViaApi2() {
