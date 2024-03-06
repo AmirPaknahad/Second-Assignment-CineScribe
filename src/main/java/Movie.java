@@ -1,21 +1,28 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Movie {
-    public static final String API_KEY = "7d00edc5";   // TODO --> add your api key about Movie here
+    public static final String API_KEY = "7d00edc5";
     int ImdbVotes;
     ArrayList<String> actorsList;
     String rating;
 
     public Movie(ArrayList<String> actorsList, String rating, int ImdbVotes){
-        //TODO --> (Write a proper constructor using the get_from_api functions)
+        this.actorsList = actorsList;
+        this.rating = rating;
+        this.ImdbVotes = ImdbVotes;
     }
 
     @SuppressWarnings("deprecation")
-    /**
+    /*
      * Retrieves data for the specified movie.
      *
      * @param title the name of the title for which MovieData should be retrieved
@@ -37,20 +44,31 @@ public class Movie {
         return stringBuilder.toString();
     }
     public int getImdbVotesViaApi(String moviesInfoJson){
-        //TODO --> (This function must change and return the "ImdbVotes" as an Integer)
-        // NOTICE :: you are not permitted to convert this function to return a String instead of an int !!!
-        int ImdbVotes = 0;
+        JSONObject object = new JSONObject(moviesInfoJson);
+
+
+        int ImdbVotes = object.getInt("imdbVotes");
         return ImdbVotes;
     }
 
     public String getRatingViaApi(String moviesInfoJson){
-        //TODO --> (This function must return the rating in the "Ratings" part
-        // where the source is "Internet Movie Database")  -->
+        JSONObject object = new JSONObject(moviesInfoJson);
+        JSONArray arr = object.getJSONArray("Ratings");
         String rating = "";
+        for (int i = 0; i < arr.length(); i++){
+            JSONObject object2 = new JSONObject(arr.get(i));
+            if (object2.getString("Sourse").equals("Internet Movie Database")){
+                rating = object2.getString("Value");
+                break;
+            }
+        }
         return rating;
     }
 
     public void getActorListViaApi(String movieInfoJson){
-        //TODO --> (This function must return the "Actors" in actorsList)
+        JSONObject object = new JSONObject(movieInfoJson);
+
+
+
     }
 }
