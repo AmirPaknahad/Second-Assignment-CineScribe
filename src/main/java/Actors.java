@@ -48,7 +48,9 @@ public class Actors {
         }
     }
     public double getNetWorthViaApi(String actorsInfoJson){
-        JSONObject object = new JSONObject(actorsInfoJson);
+        String str = actorsInfoJson.substring(1 , actorsInfoJson.length());
+        JSONObject object = new JSONObject(str);
+
 
         double result = object.getDouble("net_worth");
 
@@ -56,7 +58,8 @@ public class Actors {
     }
 
     public boolean isAlive(String actorsInfoJson){
-        JSONObject object = new JSONObject(actorsInfoJson);
+        String str = actorsInfoJson.substring(1 , actorsInfoJson.length());
+        JSONObject object = new JSONObject(str);
 
         boolean statues = object.getBoolean("is_alive");
 
@@ -64,9 +67,10 @@ public class Actors {
     }
 
     public String getDateOfDeathViaApi(String actorsInfoJson){
-        JSONObject object = new JSONObject(actorsInfoJson);
+        String str = actorsInfoJson.substring(1 , actorsInfoJson.length());
+        JSONObject object = new JSONObject(str);
         String date = "";
-        if (isAlive(actorsInfoJson)){
+        if (!isAlive(actorsInfoJson)){
             String death = object.getString("death");
             date = death;
         }
