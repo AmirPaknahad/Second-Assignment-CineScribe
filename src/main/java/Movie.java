@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Movie {
     public static final String API_KEY = "7d00edc5";
+    String Title;
     int ImdbVotes;
     ArrayList<String> actorsList;
     String rating;
@@ -65,6 +66,13 @@ public class Movie {
 
         Released = object.getString("Released");
         return Released;
+    }
+
+    public String getTitleViaApi(String moviesInfoJson) {
+        JSONObject object = new JSONObject(moviesInfoJson);
+
+        Title = object.getString("Released");
+        return Title;
     }
 
     public String getGenreViaApi(String moviesInfoJson) {

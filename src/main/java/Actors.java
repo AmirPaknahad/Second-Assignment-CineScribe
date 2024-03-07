@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 public class Actors {
     public static final String API_KEY = "d1ZGXgEvRD2aHcXSlk3SCg==bkNRy9kCHxXfbs7Y";   // TODO --> add your api key about Actors here
+    String Name;
     double netWorth;
     Boolean isAlive;
     String Gender;
@@ -60,6 +61,15 @@ public class Actors {
 
         netWorth = object.getDouble("net_worth");
         return netWorth;
+    }
+
+    public String getNameViaApi(String actorsInfoJson){
+        String str = actorsInfoJson.substring(1 , actorsInfoJson.length());
+        JSONObject object = new JSONObject(str);
+
+
+        Name = object.getString("name");
+        return Name;
     }
     public double getHeightViaApi(String actorsInfoJson){
         String str = actorsInfoJson.substring(1 , actorsInfoJson.length());
